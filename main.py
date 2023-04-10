@@ -122,7 +122,7 @@ class CartWindow(QWidget):
         c = conn.cursor()
 
         items_str = ','.join([item['name'] for item in self.items])
-        # c.execute("INSERT INTO Invoice (invoice_no, items_purchased) VALUES (?, ?)", (i+1, items_str,))
+        c.execute("INSERT INTO Invoice (invoice_no, items_purchased) VALUES (?)", (items_str,))
         print(items_str)
 
         conn.commit()
