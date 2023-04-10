@@ -18,14 +18,14 @@ for i in range(1000):
 # connect to the database and create the table
 conn = sqlite3.connect("Food.db")
 c = conn.cursor()
-# c.execute('DROP TABLE IF EXISTS Invoice')
-# c.execute("CREATE TABLE Invoice (invoice_no INTEGER PRIMARY KEY, items_purchased TEXT)")
+c.execute('DROP TABLE IF EXISTS Invoice')
+c.execute("CREATE TABLE Invoice (invoice_no INTEGER PRIMARY KEY AUTOINCREMENT, items_purchased TEXT)")
 
 # insert the transactions into the table
 #change the invoice no to be the index of the transaction
 for i, transaction in enumerate(transactions):
     items_str = ",".join(transaction)
-    c.execute("INSERT INTO Invoice (invoice_no, items_purchased) VALUES (?, ?)", (i+1, items_str))
+    c.execute("INSERT INTO Invoice (items_purchased) VALUES (?)", (items_str,))
 
 # commit the changes and close the connection
 conn.commit()
