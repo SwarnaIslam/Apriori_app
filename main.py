@@ -2,7 +2,6 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QPushButton, QHBoxLayout, QVBoxLayout, QWidget, QSpinBox, QLabel
 from PyQt5.QtWidgets import QMessageBox
 import sqlite3
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -55,7 +54,7 @@ class MainWindow(QMainWindow):
     def showCart(self):
         cartWindow = CartWindow()
 
-        subtotal = 0  # new
+        subtotal = 0
 
         for row in range(self.tableWidget.rowCount()):
             quantity = self.tableWidget.cellWidget(row, 2).value()
@@ -63,9 +62,9 @@ class MainWindow(QMainWindow):
                 name = self.tableWidget.item(row, 0).text()
                 price = int(self.tableWidget.item(row, 1).text())  # convert price to integer
                 cartWindow.addItem(name, price, quantity)
-                subtotal += price * quantity  # new
+                subtotal += price * quantity
 
-        cartWindow.addSubtotal(subtotal)  # new
+        cartWindow.addSubtotal(subtotal)
 
         self.cartWindow = cartWindow 
         cartWindow.show()
@@ -76,17 +75,17 @@ class CartWindow(QWidget):
 
         self.tableWidget = QTableWidget()
         self.subtotalLabel = QLabel() 
-        self.confirmButton = QPushButton("Confirm")  # new
+        self.confirmButton = QPushButton("Confirm")
         self.setFixedSize(500, 500)
 
         self.mainLayout = QVBoxLayout()
         self.mainLayout.addWidget(self.tableWidget)
         self.mainLayout.addWidget(self.subtotalLabel) 
-        self.mainLayout.addWidget(self.confirmButton)  # new
+        self.mainLayout.addWidget(self.confirmButton)
 
         self.setLayout(self.mainLayout)
 
-        self.items = []  # new
+        self.items = []
         self.tableWidget.setRowCount(0)
         self.tableWidget.setColumnCount(4)
         self.tableWidget.setHorizontalHeaderLabels(['Name', 'Price', 'Quantity', 'Total'])
@@ -105,15 +104,33 @@ class CartWindow(QWidget):
         self.tableWidget.setItem(rowPosition , 3, QTableWidgetItem(str(total)))
         self.items.sort(key=lambda x: x["name"])
         print(self.items)
+
+        conn = sqlite3.connect('Food.db')
+        c = conn.cursor()
+
+        c.execute("SELECT * FROM Invoice")
+        invoice = c.fetchall()
+        print(invoice)
+        conn.close()
         
-        self.close()
 
     def addSubtotal(self, subtotal):
         self.subtotalLabel.setText("Subtotal: $" + str(subtotal))
         
     def confirmOrder(self):
+        conn = sqlite3.connect('Food.db')
+        c = conn.cursor()
+
+        items_str = ','.join([item['name'] for item in self.items])
+        # c.execute("INSERT INTO Invoice (invoice_no, items_purchased) VALUES (?, ?)", (i+1, items_str,))
+        print(items_str)
+
+        conn.commit()
+        conn.close()
         
         QMessageBox.information(self, "Order Confirmed", "Your order has been confirmed.")
+        self.close()
+
 
 
 
