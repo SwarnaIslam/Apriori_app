@@ -86,6 +86,7 @@ class CartWindow(QWidget):
 
         self.setLayout(self.mainLayout)
 
+        self.items = []  # new
         self.tableWidget.setRowCount(0)
         self.tableWidget.setColumnCount(4)
         self.tableWidget.setHorizontalHeaderLabels(['Name', 'Price', 'Quantity', 'Total'])
@@ -93,6 +94,8 @@ class CartWindow(QWidget):
 
 
     def addItem(self, name, price, quantity):
+        item = {"name": name, "price": price, "quantity": quantity}
+        self.items.append(item)
         rowPosition = self.tableWidget.rowCount()
         self.tableWidget.insertRow(rowPosition)
         self.tableWidget.setItem(rowPosition , 0, QTableWidgetItem(name))
@@ -105,8 +108,12 @@ class CartWindow(QWidget):
         self.subtotalLabel.setText("Subtotal: $" + str(subtotal))
         
     def confirmOrder(self):
+        self.items.sort(key=lambda x: x["name"])
+        print(self.items)
+        
         self.close()
         QMessageBox.information(self, "Order Confirmed", "Your order has been confirmed.")
+
 
 
 if __name__ == '__main__':
