@@ -103,15 +103,16 @@ class CartWindow(QWidget):
         self.tableWidget.setItem(rowPosition , 2, QTableWidgetItem(str(quantity)))
         total = price * quantity
         self.tableWidget.setItem(rowPosition , 3, QTableWidgetItem(str(total)))
+        self.items.sort(key=lambda x: x["name"])
+        print(self.items)
+        
+        self.close()
 
     def addSubtotal(self, subtotal):
         self.subtotalLabel.setText("Subtotal: $" + str(subtotal))
         
     def confirmOrder(self):
-        self.items.sort(key=lambda x: x["name"])
-        print(self.items)
         
-        self.close()
         QMessageBox.information(self, "Order Confirmed", "Your order has been confirmed.")
 
 
