@@ -2,9 +2,13 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QPushButton, QHBoxLayout, QVBoxLayout, QWidget, QSpinBox, QLabel
 from PyQt5.QtWidgets import QMessageBox
 import sqlite3
+from PyQt5 import QtCore
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        self.setGeometry(460, 290, 400, 500)
+
 
         self.tableWidget = QTableWidget()
         self.setCentralWidget(self.tableWidget)
