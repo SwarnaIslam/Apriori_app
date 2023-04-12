@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.AddNewItemController">
+   <children>
+      <AnchorPane layoutX="-5.0" layoutY="-8.0" prefHeight="602.0" prefWidth="600.0" style="-fx-background-color: #000;">
+         <children>
+            <Button fx:id="addNewBtn" layoutX="481.0" layoutY="555.0" mnemonicParsing="false" onAction="#addNewItem" prefHeight="33.0" prefWidth="78.0" style="-fx-background-color: #4CAF50;" text="Add">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Label layoutX="100.0" layoutY="283.0" prefHeight="17.0" prefWidth="53.0" text="Price:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="100.0" layoutY="157.0" text="Name:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Text fill="WHITE" layoutX="250.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment" textAlignment="CENTER" wrappingWidth="122.857421875">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Text layoutX="264.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Your Cart">
+               <font>
+                  <Font name="Amiri Bold" size="18.0" />
+               </font>
+            </Text>
+            <Button fx:id="back" layoutX="47.0" layoutY="552.0" mnemonicParsing="false" onAction="#goBack" prefHeight="33.0" prefWidth="78.0" style="-fx-background-color: #4CAF50;" text="Back">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Label layoutX="100.0" layoutY="218.0" prefHeight="17.0" prefWidth="79.0" text="Description:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameField" layoutX="237.0" layoutY="153.0" prefHeight="25.0" prefWidth="255.0" />
+            <TextField fx:id="desField" layoutX="237.0" layoutY="222.0" prefHeight="25.0" prefWidth="255.0" />
+            <TextField fx:id="priceField" layoutX="237.0" layoutY="279.0" prefHeight="25.0" prefWidth="255.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
